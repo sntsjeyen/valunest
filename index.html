@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>ValuNest</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        #banner {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(assets/images/background.jpeg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            width: 100%;
+            margin: auto;
+            padding: 35px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.75);
+            color: #fff;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 45px;
+            height: auto;
+            margin-left: 30px;
+            /*cursor: pointer;*/
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            /*cursor: pointer;*/
+            margin-left: 20px;
+            margin-right: 30px;
+        }
+
+        .navbar h1 {
+            margin-left: 10px;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .navbar ul li::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #9FFFF5;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transition: 0.5s;
+        }
+
+        .navbar ul li:hover::after {
+            width: 100%;
+        }
+
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .content h1 {
+            font-size: 70px;
+            margin-top: 80px;
+        }
+
+        .button {
+            width: 200px;
+            padding: 15px 0;
+            text-align: center;
+            margin: 20px 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #6ABEA7;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        span {
+            background: #6ABEA7;
+            height: 100%;
+            width: 0;
+            border-radius: 25px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: 0.5s;
+        }
+
+        button:hover span {
+            width: 100%;
+        }
+
+        button:hover {
+            border: 2px solid #6ABEA7;
+        }
+        /*--About Section--*/
+        .banner2 {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(179, 178, 178, 0.75), rgba(0, 0, 0, 0.75)), url(assets/images/background2.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #About {
+            width: 100%;
+        }
+
+        .title-container {
+            width: 50%;
+            height: 45vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 140%);
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 30px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .title-text {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .title-text h1 {
+            border-top: 2px solid #000000;
+            padding-top: 20px;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 50px;
+        }
+
+        .title-text h2 {
+            padding-top: 15px;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .title-text h3 {
+            border-bottom: 2px solid #000000;
+            padding-top: 5px;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 50px;
+        }
+
+        .title-text p {
+            text-align: justify;
+            padding: 20px;
+            font-size: 17px;
+        }
+
+        /*--Calculator--*/
+        .banner3 {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(179, 178, 178, 0.75)), url(assets/images/background3.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #banner4 {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(179, 178, 178, 0.75), rgba(0, 0, 0, 0.75)), url(assets/images/background4.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #Calculator {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pctitle-text {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .pctitle-text h1 {
+            padding-top: 175px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 50px;
+            color: #fff;
+        }
+
+        /*.choice {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .radio-group {
+            margin-right: 20px;
+            color: #fff;
+        }
+        
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+        
+        .radio-group label {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 2px solid #6ABEA7;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .radio-group input[type="radio"]:checked + label {
+            background-color: #6ABEA7;
+            color: #fff;
+        }
+        
+        #importSection {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        #importSection.show {
+            display: block;
+        }
+        
+        #importSection input[type="file"] {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            border: 2px solid #6ABEA7;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+        }*/
+
+        .full-tab {
+            width: 70%;
+            margin: auto;
+            border: 2px solid #6ABEA7;
+        }
+
+        .tab {
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .tab button {
+            background: none;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .tab button:hover {
+            background-color: #ccc;
+        }
+
+        .tab button.active {
+            /*background: none;*/
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #pred-label {
+            margin-left: 40px;
+        }
+
+        select {
+            margin-left: 8px;
+            width: 50px;
+            height: 25px;
+            font-size: 15px;
+            border: 2px solid #6ABEA7;
+        }
+
+        #select-pred {
+            display: inline-block;
+        }
+
+        #pred {
+            width: 150px
+        }
+
+        #table-container {
+            height: 180px;
+            overflow-y: auto;
+        }
+
+        #new {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #add-row, #delete-row {
+            border: 2px solid #6ABEA7;
+            height: 25px;
+            width: 100px;
+            margin-left: 40px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        #add-row:hover {
+            background-color: #6ABEA7;
+            color: #fff;
+        }
+
+        #delete-row:hover {
+            background-color: #6ABEA7;
+            color: #fff;
+        }
+
+        #calculate, #predict {
+            border: 2px solid #6ABEA7;
+            height: 35px;
+            width: 150px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: large;
+            transition: background-color 0.3s;
+        }
+
+        #calculate:hover, #predict:hover {
+            background-color: #6ABEA7;
+            color: #fff;
+        }
+
+        table, th, td {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        input {
+            width: 150px;
+            border: 2px solid #6ABEA7;
+        }
+
+        /*#import-section {
+            margin-top: 10px;
+            text-align: center;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            border: 2px solid #6ABEA7;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+        }*/
+
+        #plot-space {
+            overflow: auto;
+            height: 300px;
+        }
+
+        /*Footer*/
+        #Footer {
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
+        .copyright-text {
+            padding-top: 20px;
+            font-size: 10px;
+        }
+
+        #predict {
+            display: none;
+        }
+
+        #about-text {
+            text-indent: 50px;
+        }
+    </style>
+</head>
+<body>
+    <section id="banner">
+        <div class="navbar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" class="logo" alt="Logo">
+                <h1> ValuNest </h1>
+            </div>
+            <ul>
+                    <div class="icon-container">
+                        <li><a href="#banner">Home</a></li>
+                        <li><a href="#About">About</a></li>
+                        <li><a href="#Calculator">Prediction Calculator</a></li>
+                    </div>
+            </ul>
+        </div>
+        <div class="content">
+            <h1> VALUNEST </h1>
+            <h2> HOUSE PRICE PREDICTION </h2>
+            <div>
+                <a href="#Calculator"><button type="button" class="button"><span></span>TRY NOW</button></a>
+            </div>
+        </div>
+    </section>
+    <!--About-->
+    <section id="About">
+        <div class="banner2">
+            <div class="title-container">
+                <div class="title-text">
+                    <h1> About </h1>
+                    <p id="about-text">
+                                ValuNest is a name that is a combination of two words, "value" which
+                                puts emphasis on the purpose, and "nest" that is a representation of a home.
+                                This aims to help people for careful analysis before purchasing a house
+                                through predicting prices based on predictors. ValuNest utilizes linear 
+                                regression in predicting house price. Meanwhile, HTML, CSS, and JavaScript
+                                were used for the development of the web application. It makes predictions
+                                based on three key factors: plot area, number of rooms (bedrooms and
+                                bathrooms combined), and number of stories. 
+                    </p>
+                    <h3>  </h3> <!--For border purposes-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Calculator-->
+    <section id="Calculator">
+        <div class="banner3">
+            <div class="pctitle-text">
+                <h1> Prediction Calculator </h1>
+            </div>
+            <div class="full-tab">
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'manual')">MANUAL INPUT</button>
+                    <!--<button class="tablinks" onclick="openTab(event, 'import')">IMPORT CSV FILE</button>-->
+                </div>
+                <div id="manual" class="tabcontent">
+                    <div>
+                        <label for="pred-num">Number of predictors:</label>
+                        <select name="pred-num" id="pred-num" onchange="selectPred()">
+                            <option value="pred-num-1">1</option>
+                            <option value="pred-num-2">2</option>
+                            <option value="pred-num-3">3</option>
+                        </select>
+                        <div id="select-pred">
+                            <label id="pred-label" for="pred">Select predictors:</label>
+                            <select name="pred" id="pred" onchange="modifyTable()">
+                                <option value="pred-1">Plot area</option>
+                                <option value="pred-2">Number of rooms</option>
+                                <option value="pred-3">Number of stories</option>
+                            </select>
+                        </div>
+                        <button id="add-row" onclick="addRow()">ADD ROW</button>
+                        <button id="delete-row" onclick="deleteRow()">DELETE ROW</button>
+                    </div>
+                    <br>
+                    <div id="table-container">
+                        <table id="values" style="width:100%">
+                            <tr>
+                                <th>Plot area (x)</th>
+                                <th>House Price (y)</th>
+                            </tr>
+                            <tr>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="number"></td>
+                                <td><input type="number"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button id="calculate" href="#banner4" onclick="calculate()">CALCULATE</button>
+                    <br>
+                </div>
+            <!--<div id="import" class="tabcontent">
+                    <div id="import-section">
+                        <input type="file" id="fileInput" accept=".csv">
+                    </div>
+                </div>-->
+            </div>
+        <!--<div class="choice">
+                <div class="radio-group">
+                    <input type="radio" id="manual" name="choice" value="manual">
+                    <label for="manual">Manual</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="import" name="choice" value="import">
+                    <label for="import">Import DataSet</label>
+                </div>
+            </div>-->
+            <!-- Import Section -->
+            <!--<div id="importSection">
+                <input type="file" id="fileInput" accept=".csv">
+            </div>-->
+        </div>
+    </section>
+
+    <!--Output-->
+    <section id="banner4">
+        <div class="pctitle-text">
+            <h1>Output</h1>
+            <br>
+            <div class="full-tab">
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'results')">RESULTS</button>
+                    <button class="tablinks" onclick="openTab(event, 'plot-space')">PLOT</button>
+                    <button class="tablinks" onclick="openTab(event, 'prediction')">PREDICTION</button>
+                </div>
+                <div id="results" class="tabcontent">
+                    <h3 id="reg-line"></h3>
+                    <h3 id="standard-error"></h3>
+                    <h3 id="coef"></h3>
+                    <h3 id="verbal"></h3>
+                </div>
+                <div id="plot-space" class="tabcontent">
+
+                </div>
+                <div id="prediction" class="tabcontent">
+                    <div>
+                        <label id="new-values-label" for="new-values"></label>
+                        <table id="new">
+                            <tr id="new-values"></tr>
+                        </table>
+                        <button id="predict" onclick="predictValue()">PREDICT</button>
+                        <br>
+                        <h3 id="new-value"></h3>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <section id="Footer">
+        <div class="footer-text">
+            <p> Created by </p>
+            <p> Garcia, John Clarenz | Santos, Jun Nathan </p>
+        </div>
+        <div class="copyright-text">
+            <p> © 2024 ValuNest House Price Prediciton. All Rights Reserved </p>
+        </div>
+    </section>
+
+    <script>
+        // For mode of inputting values
+        function openTab(evt, inputMode) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(inputMode).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // For selecting predictors
+        function selectPred() {
+            var select_pred, pred, pred_num, x_num, row, cell;
+            let predictors = ["Plot area", "Number of rooms", "Number of stories"]
+            let x = ["x₁", "x₂", "x₃"]
+            let table = document.getElementById("values");
+
+            select_pred = document.getElementById("select-pred");
+            pred = document.getElementById("pred");
+
+            pred_num = document.getElementById("pred-num");
+            x_num = parseInt(pred_num.options[pred_num.selectedIndex].text);
+
+            if(x_num == 3) {
+                select_pred.style.display = "none";
+            }
+            else {
+                if(x_num == 1) {
+                    select_pred.style.display = "inline-block";
+                    for(let i = 0; i < predictors.length; i++) {
+                        pred.options[i].text = predictors[i]
+                    }
+                }
+                else if(x_num == 2) {
+                    select_pred.style.display = "inline-block";
+                    opt = 0
+                    for(let i = 0; i < x_num; i++) {
+                        for(let j = (i + 1); j <= x_num; j++) {
+                            pred.options[opt].text = predictors[i] + " (x₁), " + predictors[j] + " (x₂)"
+                            opt++
+                        }
+                    }
+                }
+            }
+
+            modifyTable()
+        }
+
+        function modifyTable() {
+            var predictors, x, table, pred_num, pred, x_num, p, row, cell
+
+            predictors = ["Plot area", "Number of rooms", "Number of stories"]
+            x = [" (x₁)", " (x₂)", " (x₃)"]
+            
+            table = document.getElementById("values");
+            pred_num = document.getElementById("pred-num");
+            pred = document.getElementById("pred");
+            x_num = parseInt(pred_num.options[pred_num.selectedIndex].text);
+            p = pred.options[pred.selectedIndex].text
+
+            while(table.rows.length != 0) {
+                table.deleteRow(-1);
+            }
+
+            // Add headers
+            row = table.insertRow(0)
+            for(let i = 0; i < x_num; i++) {
+                cell = row.insertCell(i)
+                if(x_num == 1) {
+                    cell.innerHTML = p + " (x)"
+                }
+                else if(x_num == 2) {
+                    cell.innerHTML = (p.split(", "))[i]
+                }
+                else {
+                    cell.innerHTML = predictors[i] + x[i]
+                }
+            }
+            (row.insertCell(x_num)).innerHTML = "House Price (y)"
+
+            // Add rows for input
+            for(let i = 0; i <= (x_num + 1); i++) {
+                row = table.insertRow(i + 1)
+                for(let j = 0; j <= x_num; j++) {
+                    cell = row.insertCell(j);
+                    cell.innerHTML = '<input type="number">';
+                }
+            }
+        }
+
+        // Function for adding rows
+        function addRow() {
+            let table = document.getElementById("values");
+            let row = table.insertRow(-1);
+            let pred_num = document.getElementById("pred-num");
+            let v = parseInt(pred_num.options[pred_num.selectedIndex].text)
+
+            for(i = 0; i <= v; i++) {
+                cell = row.insertCell(i);
+                cell.innerHTML = "<input>";
+            }
+        }
+
+        // Function for adding rows
+        function deleteRow() {
+            let table = document.getElementById("values");
+            let r = table.rows.length
+            let pred_num = document.getElementById("pred-num")
+            let x_num = parseInt(pred_num.options[pred_num.selectedIndex].text)
+
+            if((r - 1) > (x_num + 2)) {
+                document.getElementById("values").deleteRow(-1);
+            }
+            else {
+                alert("No more rows can be deleted.")
+            }
+        }
+
+        // For calculations
+        function calculate() {
+            window.location.href = "#banner4";
+            // Get values inputted by user
+            let table = document.getElementById("values")
+            let pred_num = document.getElementById("pred-num")
+            let x_num = pred_num.options[pred_num.selectedIndex].text
+            let cell = table.rows[1].cells[0].innerHTML
+            
+            let n = (table.rows.length) - 1
+
+            let x = []
+            for(let i = 0; i < x_num; i++) {
+                x.push([])
+            }
+
+            for(let i = 0; i < x.length; i++) {
+                for(let j = 1; j <= n; j++) {
+                    x[i].push(parseFloat(table.rows[j].cells[i].getElementsByTagName('input')[0].value))
+                }
+            }
+
+            let y = []
+            for(let i = 1; i <= n; i++) {
+                y.push(parseFloat(table.rows[i].cells[x_num].getElementsByTagName('input')[0].value))
+            }
+
+            if((table.rows.length - 1) <= table.rows[0].cells.length) {
+                alert("The number of variables must be smaller than the number of values.")
+                return 
+            }
+
+            for(let i = 0; i < x.length; i++) {
+                if(x[i].includes(NaN) || y.includes(NaN)) {
+                    alert("Enter numerical values and fill all spaces.")
+                    return
+                }
+            }
+
+            let p = x.length + 1
+            
+            // Call functions for calculating summations to be assigned to variables
+            let x_sum = addXValues(x)
+            let y_sum = addYValues(y)
+            let x_sqr_sum = addXSqrValues(x)
+            let xy_prod_sum = addXyProdValues(x, y)
+            
+            // Defining other variables
+            let xx_prod_sum = []
+            let matrix = []
+            let a = []
+            let func = ""
+            let sr = 0
+            
+            // For multiple linear regression
+            if(x.length > 1) {
+                // Call function for calculating summations of x and y values
+                xx_prod_sum = addXxProdValues(x)
+                
+                // Call function for building the matrix
+                matrix = buildMatrix(n, x_sum, y_sum, x_sqr_sum, xx_prod_sum, xy_prod_sum)
+                
+                // Call function for Gauss-Jordan elimination method to get coefficients
+                a = gaussJordanMethod(matrix)
+                func = parseFloat(a[0])
+                for (let i = 1; i < a.length; i++) {
+                    func = func + "+" + parseFloat(a[i]) + "*x_" + parseInt(i)
+                }
+                switch(x.length) {
+                    case 2:
+                        function f(x_1, x_2) {
+                            return eval(func)
+                        }
+                        break;
+                    case 3:
+                        function f(x_1, x_2, x_3) {
+                            return eval(func)
+                        }
+                        break;
+                }
+            }
+            
+            // For simple linear regression
+            else {
+                a = solveParams(n, xy_prod_sum[0], x_sum[0], y_sum, x_sqr_sum[0])
+                func = parseFloat(a[0]) + "+" + parseFloat(a[1]) + "*x"
+                function f(x) {
+                    return eval(func)
+                }
+            }
+            
+            // Call function to compute for the sum of squared residuals around the mean line
+            let st = computeSt(y, (y_sum / n))
+            
+            // Compute for the sum of squared residuals around the regression line
+            for(let i = 0; i < x[0].length; i++) {
+                switch(x.length) {
+                    case 1:
+                        sr = computeSr(y[i], f(x[0][i]), sr)
+                        break;
+                    case 2:
+                        sr = computeSr(y[i], f(x[0][i], x[1][i]), sr)
+                        break;
+                    case 3:
+                        sr = computeSr(y[i], f(x[0][i], x[1][i], x[2][i]), sr)
+                        break;
+                }
+            }
+            
+            // Call function to compute for the standard error of estimate
+            let error = computeStandardError(sr, n, p)
+
+            // Call the function to compute for the correlation coefficient
+            let r = computeR(st, sr)
+            
+            func = func.replace(/_1/gi, "₁")
+            func = func.replace(/_2/gi, "₂")
+            func = func.replace(/_3/gi, "₃")
+            func = func.replace(/\*/gi, "")
+            func = func.replace(/\+-/gi, "-")
+            console.log(func, func, error, r)
+            displayOutput(func, a, error, r, x, y)
+        }
+
+        // Function for calculating the summation(s) of independent values
+        function addXValues(x) {
+            let sums = []
+            for(let i = 0; i < x.length; i++) {
+                let sum = 0
+                x[i].forEach(num => {sum += num})
+                sums.push(sum)
+            }
+            return sums
+        }
+
+        // Function for calculating the summation of dependent values
+        function addYValues(y) {
+            let sum = 0
+            y.forEach(num => {sum += num})
+            return sum
+        }
+
+        // Function for calculating the summation(s) of squared independent values
+        function addXSqrValues(x) {
+            let sums = []
+            for(let i = 0; i < x.length; i++) {
+                let sum = 0
+                x[i].forEach(num => {sum += (num * num);})
+                sums.push(sum)
+            }
+            return sums
+        }
+
+        // Function for calculating the summation(s) of the products of independent values
+        function addXxProdValues(x) {
+            let sums = []
+            for(let i = 0; i < x.length; i++) {
+                for(let j = i + 1; j < x.length; j++) {
+                    let sum = 0
+                    for(let k = 0; k < x[i].length; k++) {
+                        sum += x[i][k] * x[j][k]
+                    }
+                sums.push(sum)
+                }
+            }
+            return sums
+        }
+
+        // Function for calculating the summation(s) of the products of independent and dependent values
+        function addXyProdValues(x, y) {
+            let sums = []
+            for(let i = 0; i < x.length; i++) {
+                let sum = 0
+                for(let j = 0; j < y.length; j++) {
+                    sum += (x[i][j] * y[j])
+                }
+                sums.push(sum)
+            }
+            return sums
+        }
+
+        // Function for building the matrix
+        function buildMatrix(n, x_sum, y_sum, x_sqr_sum, xx_prod_sum, xy_prod_sum) {
+            let m = []
+            
+            // Putting zeroes as placeholders
+            for(let i = 0; i <= x_sum.length; i++) {
+                m.push([])
+                for(let j = 0; j <= (x_sum.length + 1); j++) {
+                    m[i].push(0)
+                }
+            }
+            
+            // First row and column
+            m[0][0] = n
+            for(let i = 0; i < 1; i++) {
+                for(let j = 1; j <= x_sum.length; j++) {
+                    m[i][j] = x_sum[j - 1]
+                    m[j][i] = x_sum[j - 1]
+                }
+            }
+            // Non-diagonal elements
+            for(let i = 1; i < x_sum.length; i++) {
+                for(let j = (i + 1); j <= x_sum.length; j++) {
+                    m[i][j] = xx_prod_sum[(i + j) - 3]
+                    m[j][i] = xx_prod_sum[(i + j) - 3]
+                }
+            }
+            
+            // Diagonal elements
+            for(let i = 1; i <= x_sum.length; i++) {
+                m[i][i] = x_sqr_sum[i - 1]
+            }
+            
+            // Last column
+            m[0][x_sum.length + 1] = y_sum
+            for(let i = 1; i <= x_sum.length; i++) {
+                let j = x_sum.length + 1
+                m[i][j] = xy_prod_sum[i - 1]
+            }
+            return m
+        }
+
+        // Function for getting best fit regression line
+        function gaussJordanMethod(m) {
+            let a = []
+            
+            // Gaussian elimination method
+            for(let i = 0; i < m.length; i++) {
+                for(let j = 0; j <= i; j++) {
+                    if(i == j) {
+                        if(m[i][j] != 1) {
+                            if(m[i][j] == 0) {
+                                break;
+                            }
+                            else {
+                                val = (1 / m[i][j])
+                                for(let k = 0; k < m[i].length; k++) {
+                                    m[i][k] = val * m[i][k]
+                                }
+                            }
+                        }
+                    } else if(m[i][j] != 0) {
+                        val = (m[i][j]) * (-1)
+                        for(let k = 0; k < m[i].length; k++) {
+                            m[i][k] = (val * m[j][k]) + m[i][k]
+                        }
+                    }
+                }
+            }
+            
+            // Gauss-Jordan method
+            for(let i = 1; i < m.length; i++) {
+                for(let j = 0; j < i; j++) {
+                    if(m[j][i] != 0) {
+                        val = (m[j][i]) * (-1)
+                        for(let k = 0; k < m[i].length; k++) {
+                            m[j][k] = (val * m[i][k]) + m[j][k]
+                        }
+                    }
+                }
+            }
+            
+            // Getting coefficients
+            for(let i = 0; i < m.length; i++) {
+                a.push(Math.round(((m[i][m.length]) + Number.EPSILON) * 100) / 100)
+            }
+            return a
+        }
+
+        // Function for solving coefficients in simple linear regression
+        function solveParams(n, xy_prod_sum, x_sum, y_sum, x_sqr_sum) {
+            let a1 = ((n * xy_prod_sum) - (x_sum * y_sum)) / ((n * x_sqr_sum) - (Math.pow(x_sum, 2)))
+            let a0 = (y_sum / n) - (a1 * (x_sum / n))
+            return [a0, a1]
+        }
+
+        // Function to calculate the sum of squared residuals around the mean line
+        function computeSt(y, y_mean) {
+            let sum = 0
+            y.forEach(num => {sum += Math.pow((num - y_mean), 2)})
+            return sum
+        }
+
+        // Function to calculate the sum of squared residuals around the regression line
+        function computeSr(y, y_x, sr) {
+            sr += Math.pow((y - y_x), 2)
+            return sr
+        }
+
+        // Function to compute for the standard error of estimate
+        function computeStandardError(sr, n, p) {
+            let error = Math.sqrt(sr / (n - p))
+            return error
+        }
+
+        // Function to compute for the correlation coefficient
+        function computeR(st, sr) {
+            let r = []
+            r.push(Math.sqrt((st - sr) / st))
+            let coef = r[0]
+            
+            // For verbal description or interpretation
+            switch (true) {
+                case coef < -0.70 && coef >= -1:
+                    r.push("Very Strong", "Negative")
+                    break;
+                case coef < -0.50 && coef >= -0.70:
+                    r.push("Strong", "Negative")
+                    break;
+                case coef < -0.30 && coef >= -0.50:
+                    r.push("Moderate", "Negative")
+                    break;
+                case coef < 0 && coef >= -0.30:
+                    r.push("Weak", "Negative")
+                    break;
+                case coef == 0:
+                    r.push("None", "Zero")
+                    break;
+                case coef > 0 && coef <= 0.30:
+                    r.push("Weak", "Positive")
+                    break;
+                case coef > 0.30 && coef <= 0.50:
+                    r.push("Moderate", "Positive")
+                    break;
+                case coef > 0.50 && coef <= 0.70:
+                    r.push("Strong", "Positive")
+                    break;
+                case coef > 0.70 && coef <= 1:
+                    r.push("Very Strong", "Positive")
+                    break;
+            }
+            return r
+        }
+
+        function displayOutput(f, a, e, r, x, y) {
+            document.getElementById('new-value').innerHTML = ""
+            let preds = ["Plot area", "Number of rooms", "Number of stories"]
+
+            pred_num = document.getElementById("pred-num");
+            x_num = parseInt(pred_num.options[pred_num.selectedIndex].text);
+            pred = document.getElementById("pred");
+            pred_text = pred.options[pred.selectedIndex].text
+
+            let new_values = document.getElementById("new-values");
+
+            reg_line = document.getElementById("reg-line");
+            reg_line.innerHTML = "Best Fit Regression Line : " + f
+            standard_error = document.getElementById("standard-error");
+            standard_error.innerHTML = "Standard Error of the Estimate: " + e
+            corr_coef = document.getElementById("coef");
+            corr_coef.innerHTML = "Correlation Coefficient : " + r[0]
+            verbal = document.getElementById("verbal");
+            verbal.innerHTML = "Interpretation : " + r[1] + " " + r[2]
+
+            while(new_values.cells.length != 0) {
+                new_values.deleteCell(0);
+            }
+
+            plot_space = document.getElementById("plot-space");
+            if(x.length == 1) {
+                for(let i = 0; i < x_num; i++) {
+                    cell = new_values.insertCell(0);
+                    cell.innerHTML = '<input type="number"" placeholder="' + pred_text + '">';
+                }
+                
+                const X = x[0]
+                const Y = y;
+
+                const trace = {
+                    x: X,
+                    y: Y,
+                    mode: "markers",
+                    type: "scatter",
+                }
+
+                const layout = {
+                    title: 'Linear Regression Plot',
+                    xaxis: { title: pred_text},
+                    yaxis: { title: "House price" },
+                    showlegend: false
+                }
+
+                const traceLine = {
+                    x: X,
+                    y: X.map(x => a[0] + a[1] * x),
+                    mode: 'lines',
+                    type: 'scatter',
+                    line: { color: 'red' } 
+                };
+                const data = [trace, traceLine]
+                Plotly.newPlot(plot_space, data, layout)
+            }
+            else {
+                plot_space.innerHTML = "Multiple regression plot unavailable"
+                for(let i = 0; i < x_num; i++) {
+                    cell = new_values.insertCell(-1);
+                    if(x_num == 2) {
+                        cell.innerHTML = '<input type="number"" placeholder="' + pred_text.split(", ")[i] + '">';
+                    }
+                    if(x_num == 3) {
+                        cell.innerHTML = '<input type="number"" placeholder="' + preds[i] + '">';
+                    }
+                }
+            }
+
+            document.getElementById('new-values-label').innerHTML = "Enter new values:";
+            document.getElementById('predict').style.display  = "inline-block";
+        }
+
+        function predictValue() {
+            pred_num = document.getElementById("pred-num");
+            x_num = parseInt(pred_num.options[pred_num.selectedIndex].text);
+
+            let equation = document.getElementById('reg-line').innerHTML
+            equation = equation.replace(/Best Fit Regression Line : /gi,'');
+            equation = equation.replace(/₁/gi, "_1")
+            equation = equation.replace(/₂/gi, "_2")
+            equation = equation.replace(/₃/gi, "_3")
+            equation = equation.replace(/x/gi, "*x")
+            
+            let new_values = document.getElementById("new-values");
+            let new_num = []
+            let future_value = 0
+
+            for(i = 0; i < x_num; i++) {
+                new_num.push(parseFloat(new_values.cells[i].getElementsByTagName('input')[0].value))
+            }
+
+            if(new_num.includes(NaN)) {
+                alert("Enter numerical values and fill all spaces.")
+                return   
+            }
+
+            if(x_num == 1) {
+                function f(x) {
+                    return eval(equation)
+                }
+                future_value = f(new_num[0])
+                console.log(future_value)
+            }
+            else if(x_num == 2) {
+                function f(x_1, x_2) {
+                    return eval(equation)
+                }
+                future_value = f(new_num[0], new_num[1])
+            }
+            else if(x_num == 3) {
+                function f(x_1, x_2, x_3) {
+                    return eval(equation)
+                }
+                future_value = f(new_num[0], new_num[1], new_num[2])
+            }
+
+            document.getElementById('new-value').innerHTML = "Predicted Value: " + future_value
+        }
+    </script>
+</body>
+</html>
